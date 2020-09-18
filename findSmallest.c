@@ -16,7 +16,7 @@ int main(){
 void read_array(int arr[10], int n){
     for(int i = 0; i < n; i++){
         printf("a[%d] = ", i);
-        scanf("%d", &arr[i]);
+        scanf("%d", &arr[i]);   
     }
 }
 
