@@ -187,6 +187,14 @@ struct node *insert_after(struct node *start)
     new_node->next = ptr;
     return start;
 }
+struct node *delete_beg(struct node *start)
+{
+    struct node *ptr;
+    ptr = start;
+    start = start->next;
+    free(ptr);
+    return start;
+}
 
 struct node *delete_end(struct node *start)
 {
@@ -202,7 +210,7 @@ struct node *delete_end(struct node *start)
     return start;
 }
 
-/*struct node delete_node(struct node *start)
+struct node *delete_node(struct node *start)
 {
     struct node *ptr, *preptr;
     int val;
@@ -226,4 +234,60 @@ struct node *delete_end(struct node *start)
         return start;
     }
 }
-*/
+
+struct node *delete_after(struct node *start)
+{
+    struct node *ptr, *preptr;
+    int val;
+    printf("\nEnter the value after which the node has to be deleted");
+    scanf("%d", &val);
+    ptr = start;
+    preptr = ptr;
+    while (preptr->data != val)
+    {
+        preptr = ptr;
+        ptr = ptr->next;
+    }
+    preptr->next = ptr->next;
+    free(ptr);
+    return start;
+}
+
+struct node *delete_list(struct node *start)
+{
+    struct node *ptr;
+    if (start != NULL)
+    {
+        ptr = start;
+        while (ptr != NULL)
+        {
+            printf("\n %d is to be deleted next", ptr->data);
+            start = delete_beg(ptr);
+            ptr = start;
+        }
+    }
+    return start;
+}
+
+struct node *sort_list(struct node *start)
+{
+    struct node *ptr1, *ptr2;
+    int temp;
+    ptr1 = ptr2;
+    while (ptr1->next != NULL)
+    {
+        ptr2 = ptr1->next;
+        while (ptr2 != NULL)
+        {
+            if (ptr1->data > ptr2->data)
+            {
+                temp = ptr1->data;
+                ptr1->data = ptr2->data;
+                ptr2->data = temp;
+            }
+            ptr2 = ptr2->next;
+        }
+        ptr1 = ptr1->next;
+    }
+    return start;
+}
